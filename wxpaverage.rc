@@ -1,0 +1,6 @@
+
+#define wxUSE_NO_MANIFEST 0
+
+ave_icon ICON "average.ico"
+#include "wx/msw/wx.rc"
+

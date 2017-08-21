@@ -1,0 +1,51 @@
+# Makefile for wxwidgets version of Average.  Note the extra steps required
+# for Macs.
+
+project_objects = FileDetails.o paverage.o tlight.o tfile.o TInspect.o \
+                  TWeightThread.o TConstants.o TCalibrate.o TCalEnergy.o \
+		  TDrift.o TDetails.o TMono.o
+
+project_name = wxpaverage
+
+# These flags derived from wx-config command for wxwidgets
+
+LDFLAGS = -L../unixclibrary-average-wxwin \
+          -L/usr/local/lib   -framework QuickTime -framework IOKit \
+          -framework Carbon -framework Cocoa -framework System  \
+          -lwx_mac_xrc-2.6 -lwx_mac_qa-2.6 -lwx_mac_html-2.6 -lwx_mac_adv-2.6\
+          -lwx_mac_core-2.6 -lwx_base_carbon_xml-2.6 -lwx_base_carbon_net-2.6\
+          -lwx_base_carbon-2.6 -laverage -lwxplotctrl -lwxthings
+
+CXXFLAGS = -I/usr/local/lib/wx/include/mac-ansi-release-2.6 \
+           -I/usr/local/include/wx-2.6 -D__WXMAC__ \
+           -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA  \
+	   -I../wxcode/components/wxplotctrl/include \
+	   -I../wxcode/components/wxthings/include  
+
+# This is for the dll data structure definitions
+
+XTRA_INCLUDES = -I.
+
+%.o: %.cpp %.h
+	$(CXX) -g -c $(CXXFLAGS) $(XTRA_INCLUDES) $< -o $@ 
+#
+%.o: %.cc %.h
+	$(CXX) -g -c $(CXXFLAGS) $(XTRA_INCLUDES) $< -o $@ 
+#
+app_metadata: project
+	-mkdir wxpaverage.app    
+	-mkdir wxpaverage.app/Contents
+	-mkdir wxpaverage.app/Contents/MacOS
+	-mkdir wxpaverage.app/Contents/Resources
+	-mkdir wxpaverage.app/Contents/Resources/English.lproj
+	cp Info.plist wxpaverage.app/Contents/
+	# cp version.plist wxpaverage.app/Contents/
+	# cp InfoPlist.strings wxpaverage.app/Contents/Resources/English.lproj/
+	echo -n 'APPL????' > wxpaverage.app/Contents/PkgInfo
+	cp wxpaverage wxpaverage.app/Contents/MacOS/wxpaverage
+ 
+project: $(project_objects)
+	g++ -g -o $(project_name) $(LDFLAGS) $?
+
+clean: 
+	rm $(project_objects)

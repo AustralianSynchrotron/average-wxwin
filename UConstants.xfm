@@ -1,0 +1,235 @@
+object Constants: TConstants
+  HelpContext = 15
+  Left = 323
+  Top = 125
+  Width = 271
+  Height = 151
+  VertScrollBar.Range = 146
+  HorzScrollBar.Range = 265
+  ActiveControl = OK
+  BorderIcons = [biSystemMenu]
+  Caption = 'Constants'
+  Color = clBackground
+  Font.Color = clText
+  Font.Height = 13
+  Font.Name = 'MS Sans Serif'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 40
+  ParentFont = False
+  Scaled = False
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  object OK: TBitBtn
+    Left = 190
+    Top = 121
+    Width = 75
+    Height = 25
+    Hint = 'Accept these values'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    Kind = bkOK
+  end
+  object Panel1: TPanel
+    Left = 6
+    Top = 7
+    Width = 259
+    Height = 107
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    TabOrder = 1
+    object E0Edit: TEdit
+      Left = 106
+      Top = 73
+      Width = 144
+      Height = 24
+      TabOrder = 1
+      OnChange = E0EditChange
+    end
+    object EdgeEdit: TComboBox
+      Left = 106
+      Top = 41
+      Width = 145
+      Height = 24
+      ItemHeight = 18
+      Items.Strings = (
+        'K'
+        'L1'
+        'L2'
+        'L3'
+        'M1'
+        'M2'
+        'M3'
+        'M4'
+        'M5')
+      TabOrder = 0
+      OnChange = EdgeEditChange
+    end
+    object AtomEdit: TComboBox
+      Left = 106
+      Top = 9
+      Width = 145
+      Height = 24
+      ItemHeight = 18
+      Items.Strings = (
+        'Hydrogen'
+        'Helium'
+        'Lithium'
+        'Beryllium'
+        'Boron'
+        'Carbon'
+        'Nitrogen'
+        'Oxygen'
+        'Fluorine'
+        'Neon'
+        'Sodium'
+        'Magnesium'
+        'Aluminium'
+        'Silicon'
+        'Phosphorus'
+        'Sulfur'
+        'Chlorine'
+        'Argon'
+        'Potassium'
+        'Calcium'
+        'Scandium'
+        'Titanium'
+        'Vanadium'
+        'Chromium'
+        'Manganese'
+        'Iron'
+        'Cobalt'
+        'Nickel'
+        'Copper'
+        'Zinc'
+        'Gallium'
+        'Germanium'
+        'Arsenic'
+        'Selenium'
+        'Bromine'
+        'Krypton'
+        'Rubidium'
+        'Strontium'
+        'Yttrium'
+        'Zirconium'
+        'Niobium'
+        'Molybdenum'
+        'Technetium'
+        'Ruthenium'
+        'Rhodium'
+        'Palladium'
+        'Silver'
+        'Cadmium'
+        'Indium'
+        'Tin'
+        'Antimony'
+        'Tellurium'
+        'Iodine'
+        'Xenon'
+        'Caesium'
+        'Barium'
+        'Lanthanum'
+        'Cerium'
+        'Praesodymium'
+        'Neodimium'
+        'Promethium'
+        'Samarium'
+        'Europium'
+        'Gadolinium'
+        'Terbium'
+        'Dysprosium'
+        'Holmium'
+        'Erbium'
+        'Thulium'
+        'Ytterbium'
+        'Lutetium'
+        'Hafnium'
+        'Tantalum'
+        'Tungsten'
+        'Rhenium'
+        'Osmium'
+        'Iridium'
+        'Platinum'
+        'Gold'
+        'Mercury'
+        'Thallium'
+        'Lead'
+        'Bismuth'
+        'Polonium'
+        'Astatine'
+        'Radon'
+        'Francium'
+        'Radium'
+        'Actinium'
+        'Thorium'
+        'Protactinium'
+        'Uranium'
+        'Neptunium'
+        'Plutonium'
+        'Americium'
+        'Curium'
+        'Berkelium'
+        'Californium'
+        'Einsteinium'
+        'Fermium'
+        'Mendelevium'
+        'Nobelium'
+        'Lawrencium'
+        'Rutherfordium'
+        'Unnilquadium'
+        'Hahnium'
+        'Unnilpentium'
+        'Unnilhexium')
+      TabOrder = 2
+      OnChange = AtomEditChange
+    end
+    object Panel2: TPanel
+      Left = 13
+      Top = 9
+      Width = 89
+      Height = 25
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Caption = 'Atom name'
+      TabOrder = 3
+    end
+    object Panel3: TPanel
+      Left = 13
+      Top = 41
+      Width = 89
+      Height = 25
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Caption = 'Edge type'
+      TabOrder = 4
+    end
+    object Panel4: TPanel
+      Left = 13
+      Top = 73
+      Width = 89
+      Height = 25
+      Hint = 'Threshold energy in eV'
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Caption = 'E0 energy'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+    end
+  end
+  object E0FromTable: TCheckBox
+    Left = 6
+    Top = 122
+    Width = 97
+    Height = 17
+    Hint = 'Indicates that the E0 value is from the table'
+    TabStop = False
+    Caption = 'E0 from table'
+    Enabled = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+end

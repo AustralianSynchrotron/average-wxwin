@@ -1,0 +1,2 @@
+This is a reimplimentation of the AVERAGE GUI using wxwindows in
+C++ (in order to use the wxPlotCtrl widget for plotting)

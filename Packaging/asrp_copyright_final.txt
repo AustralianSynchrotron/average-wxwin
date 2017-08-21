@@ -1,0 +1,20 @@
+
+
+ ASRP Copyright and Licensing statement
+
+In the absence of any other instructions from the ASRP, the following
+paragraphs should be displayed either at the beginning of all source
+files or in a file accompanying any software produced by ASRP staff. 
+
+1. This software copyright Australian Synchrotron Research Program,
+<year>
+
+2. Licence agreement
+
+Permission is hereby granted to copy and modify this software. Permission
+is also granted to use reasonable portions of it in other software,
+provided that suitable acknowledgement is made. The copyright owner
+does not grant the right to publish, sell, or otherwise redistribute
+this software, or modified versions, to third parties. You are encouraged
+to communicate useful modifications to the ASRP for inclusion in future
+versions.

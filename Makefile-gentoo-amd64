@@ -1,0 +1,41 @@
+# Makefile for wxwindows version of Average
+
+project_objects = FileDetails.o paverage.o tlight.o tfile.o TInspect.o \
+                  TWeightThread.o TConstants.o TCalibrate.o TDrift.o \
+		  TCalEnergy.o TDetails.o TMono.o
+
+project_name = wxpaverage
+
+# These flags derived from wx-config command for wxwidgets
+
+LDFLAGS = -L../unixclibrary-average-wxwin \
+          -L/usr/lib64 -pthread  -L/usr/X11R6/lib64 -lwx_gtk2_xrc-2.6 -lwx_gtk2_qa-2.6 \
+		  -lwx_gtk2_html-2.6 \
+          -lwx_gtk2_adv-2.6 -lwx_gtk2_core-2.6 -lwx_base_xml-2.6 \
+          -lwx_base_net-2.6 -lwx_base-2.6 -lwx_gtk2_wxthings-2.6 \
+	  -lwx_gtk2_plotctrl-2.6 \
+	  -laverage-1.4
+
+CXXFLAGS = -I/usr/lib64/wx/include/gtk2-ansi-release-2.6 \
+           -I/usr/include/wx-2.6 \
+           -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 \
+           -D_LARGE_FILES -DNO_GCC_PRAGMA
+
+# This is for the dll data structure definitions
+# And the wxcode components
+
+XTRA_INCLUDES = -I.. \
+	   -I/usr/local/src/wxcode/wxthings/include \
+	   -I/usr/local/src/wxcode/wxplotctrl/include
+
+%.o: %.cpp %.h
+	$(CXX) -g -c $(CXXFLAGS) $(XTRA_INCLUDES) $< -o $@ 
+#
+%.o: %.cc %.h
+	$(CXX) -g -c $(CXXFLAGS) $(XTRA_INCLUDES) $< -o $@ 
+#
+project: $(project_objects)
+	gcc -g -o $(project_name) $(LDFLAGS) $?
+
+clean: 
+	rm $(project_objects)

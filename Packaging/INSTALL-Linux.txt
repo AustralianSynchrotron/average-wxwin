@@ -1,0 +1,47 @@
+Installation of Average for Linux systems
+=========================================
+
+Pending the creation of an RPM or Debian package, please install
+Average by hand as follows:
+
+0. Make sure you have wxWidgets installed.  It should be the
+GTK Unicode version 2.6 - in Debian, this is package "libwxgtk2.6-0":
+
+   apt-get install libwxgtk2.6-0
+
+In Red-Hat type systems, this (might be) called wxGTK-2.6.3.
+
+1. Untar the supplied tarball into a convenient directory:
+    tar -zxvf Average-2.0.tar.gz
+
+2. Move the file named "wxpaverage" to a place where you keep
+executables (e.g. /usr/local/bin, /home/<yourid>/bin etc.)
+
+3. Move the files named "libaverage.so", "libwx_gtk2u_plotctrl-2.6.so.1.0.0"
+and "libwx_gtk2u_wxthings-2.6.so.1.0.0" to a place where you keep
+dynamic link libraries (e.g. /usr/local/lib, /usr/lib)
+
+4. From within the dynamic link library directory, make a symbolic link 
+(or else copy) the above two files to the same names with the "1.0.0" 
+missing from the end:
+
+    ln -s libwx_gtk2u_plotctrl-2.6.so.1.0.0 libwx_gtk2u_plotctrl-2.6.so
+    ln -s libwx_gtk2u_wxthings-2.6.so.1.0.0 libwx_gtk2u_wxthings-2.6.so
+
+5. Move the files named "anbf.so" and "anbf-dxp.so" to any convenient
+spot, but for the sake of good organisation, I suggest /usr/local/lib
+or /usr/local/lib/average
+
+5. Copy file "XFIT.INI" to your home directory. 
+
+6. Edit file "XFIT.INI" so that the values of "module1" and "module2"
+refer to the locations of anbf.so and anbf-dxp.so
+
+7. To check that all the dynamic link libraries are found correctly, type
+   "ldd ./wxpaverage"  (assuming wxpaverage is in the current directory).
+   If the resulting list contains "file not found" entries, it means that
+   one or more link libraries are missing.  Please advise jrh@anbf2.kek.jp
+   of the problem, and include the listing from the "ldd" command.
+
+8. If step 7 was successful, you can now execute average by typing 
+   "wxpaverage".

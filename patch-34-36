@@ -1,0 +1,97 @@
+diff -r 82835be41cd1 -r 0150d8668060 tfile.cc
+--- a/tfile.cc	Tue Oct 17 12:22:52 2006 +0900
++++ b/tfile.cc	Tue Oct 03 14:05:31 2006 +0900
+@@ -144,7 +144,7 @@ void TFile::ULight (bool UF, int CN)
+ 
+       if (W > 9) W = 9;
+ 
+-      WE = (int) floor (W);  //integer colour; 
++      WE = (int) trunc (W);  //integer colour; 
+ 
+       W = W - WE;      //remainder
+       int fact1 = (int) (255 * (1-W));
+@@ -163,15 +163,15 @@ void TFile::ULight (bool UF, int CN)
+ 
+   else
+ 
+-    if (CN == 1)
++    if (CN == 0)      //First transmission channel
+ 
+       Light = SDLight;
+ 
+     else
+ 
+-      if (CN == 2)
+-
+-        Light = FDLight;
++      if (CN == 1)
++
++        Light = FDLight; //Second transmission channel
+ 
+   if (Light != 0)
+   {
+@@ -229,13 +229,13 @@ void TFile::lightDblClick (wxMouseEvent 
+   if (event.GetId() == SDLight->GetId())
+   {
+     myInspect->setUF(FALSE);
++    myInspect->setChannel(0);
++  }
++
++  if (event.GetId() == FDLight->GetId())
++  {
++    myInspect->setUF(FALSE);
+     myInspect->setChannel(1);
+-  }
+-
+-  if (event.GetId() == FDLight->GetId())
+-  {
+-    myInspect->setUF(FALSE);
+-    myInspect->setChannel(2);
+   }
+ 
+   // In Delphi, the following method called automatically...
+@@ -302,6 +302,9 @@ TFile::TFile (wxWindow * parent) :
+   SDLight = new TLight(this);
+   FDLight = new TLight(this);
+   FFLight = new TLights(this);
++  SDLight->SetSize(-1,-1,18,18);
++  FDLight->SetSize(-1,-1,18,18);
++  FFLight->SetSize(-1,-1,18,18);
+   sizer_1->Add(SDLight,0,wxALL,5);
+   sizer_1->Add(FDLight,0,wxALL,5);
+   sizer_1->Add(FFLight,0,wxALL,5);
+@@ -318,9 +321,6 @@ TFile::TFile (wxWindow * parent) :
+   // SDLight->SetSize(25,1,18,18);
+   // FDLight->SetSize(55,1,18,18);
+   // FFLight->SetSize(85,0,18,18);
+-     SDLight->SetSize(-1,-1,18,18);
+-     FDLight->SetSize(-1,-1,18,18);
+-     FFLight->SetSize(-1,-1,18,18);
+   //SDlight.Parent = Self;
+   //FDlight.Parent = Self;
+   //FFlight.Parent = Self;
+@@ -580,15 +580,21 @@ WData * TFile::Foil()
+ 
+     CData = CoData (lUF);
+ 
+-  FData (lFoil);
++  FData (lFoil);   //This will ignore null pointers
+ 
+   lFoil = NULL;
+ 
++  // Note below that we must physically copy the data,
++  // otherwise, when we free the pointer, the destructor
++  // for WData will clear everything else as well
++  
+   if (CData != NULL)
+   {
+     lFoil = GData();
+-    lFoil->E    = CData->E;
+-    lFoil->Data = CData->Data;
++	lFoil->E = MakeVector(CData->E->Nrows());
++    *(lFoil->E)    = *(CData->E);
++	lFoil->Data = MakeVector(CData->E->Nrows());
++    *(lFoil->Data) = *(CData->Data);
+   }
+   return(lFoil);
+ }
